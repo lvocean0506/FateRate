@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"news/faterate/calc"
 )
 
 func main() {
@@ -16,15 +17,16 @@ func main() {
 
 func mainFatRateBody() {
 	//录入各项
-	weight, tall, age, sexWeight, sex := getMaterialsFromInput()
+	weight, tall, age, _, sex := getMaterialsFromInput()
 
 	//计算体脂率
-	fatRate := calcFatRate(weight, tall, age, sexWeight)
-	if fatRate<=0{
+
+	fateRate := calcFateRate(weight, tall, age, sex)
+	if fateRate <= 0 {
 		panic("fat rate is not allowed to be negative")
 	}
 	//给出建议
-	getHealthinessSuggestions(sex, age, fatRate)
+	getHealthinessSuggestions(sex, age, fateRate)
 }
 
 func getHealthinessSuggestions(sex string, age int, fatRate float64) {
@@ -150,12 +152,13 @@ func getHealthinessSuggestions(sex string, age int, fatRate float64) {
 	}
 }
 
-func calcFatRate(weight float64, tall float64, age int, sexWeight int) float64 {
+func calcFateRate(weight float64, tall float64, age int, sex string) float64 {
 	//计算体脂率
-	bmi := weight / (tall * tall)
-	fatRate := (1.2*bmi + 0.23*float64(age) - 5.4 - 10.8*float64(sexWeight)) / 100
-	fmt.Println("体脂率是", fatRate)
-	return fatRate
+
+	bmi := calc.CalcBMI(tall, weight)
+	fateRate := calc.ClacFateRate(bmi, age, sex)
+	fmt.Println("体脂率是", fateRate)
+	return fateRate
 }
 
 func getMaterialsFromInput() (float64, float64, int, int, string) {
@@ -197,5 +200,3 @@ func whetherContinue() bool {
 	}
 	return true
 }
-
-
