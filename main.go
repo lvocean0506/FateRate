@@ -13,6 +13,9 @@ func main() {
 		}
 	}
 	fmt.Println("修复bug")
+
+	fmt.Println("开发到了100%")
+
 }
 
 func mainFatRateBody() {
