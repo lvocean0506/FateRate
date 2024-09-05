@@ -12,7 +12,7 @@ func main() {
 			break
 		}
 	}
-
+fmt.Println("开发到了50%")
 }
 
 func mainFatRateBody() {
