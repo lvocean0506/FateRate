@@ -12,7 +12,7 @@ func main() {
 			break
 		}
 	}
-
+	fmt.Println("修复bug")
 }
 
 func mainFatRateBody() {
